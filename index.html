@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://unpkg.com/swiper@10.2.0/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@10.2.0/swiper-bundle.min.css"/>
+</head>
+<body>
+	
+<div class="table-wrap">
+	<img src="content1.jpg" usemap="#map01">
+    <div class="table-header-wrap">
+        <span>　접수정보</span>
+        <span>접수일</span>
+        <span>진행상태</span>
+    </div>
+
+    <div class="table-main-wrap mySwiper">
+        <div class="swiper-wrapper">
+            <div class="table-item-wrap swiper-slide">
+                <span><strong class="name"></strong><strong2 class="content"> 150,000원 상담접수완료</strong2></span>
+                <span class="day"></span>
+                <span class="status"></span>
+            </div>
+
+           <div class="table-item-wrap swiper-slide">
+                <span><strong class="name"></strong><strong2 class="content"> 상담접수완료</strong2></span>
+                <span class="day"></span>
+                <span class="status"></span>
+            </div>
+
+            <div class="table-item-wrap swiper-slide">
+                <span><strong class="name"></strong><strong2 class="content"> 상담접수완료</strong2></span>
+                <span class="day"></span>
+                <span class="status"></span>
+            </div>
+
+            <div class="table-item-wrap swiper-slide">
+                <span><strong class="name"></strong><strong2 class="content"> 상담접수완료</strong2></span>
+                <span class="day"></span>
+                <span class="status"></span>
+            </div>
+
+            <div class="table-item-wrap swiper-slide">
+                <span><strong class="name"></strong><strong2 class="content"> 상담접수완료</strong2></span>
+                <span class="day"></span>
+                <span class="status"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const nameData = ['[임**]', '[박**]', '[박**]', '[이**]', '[정**]', '[백**]', '[권**]', '[강**]', '[전**]', '[이**]', '[정**]', '[이**]', '[김**]', '[김**]', '[이**]']
+    const statusData = ['입금완료', '입금완료', '입금완료', '대기중']
+    const priceData = ['50,000원', '70,000원', '100,000원', '100,000원', '150,000원', '200,000원', '300,000원', '350,000원', '80,000원', '150,000원']
+
+    window.addEventListener('load', () => {
+        const swiper = new Swiper(".mySwiper", {
+            loop: true,
+            direction: 'vertical',
+            slidesPerView: 7,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+            },
+        });
+
+        const now = new Date();
+        const month = (now.getMonth() + 1).toString().padStart(2, "0");
+        const day = now.getDate()
+        const today = `${month}-${day}`;
+
+        const dayEl = document.querySelectorAll('.day');
+        dayEl.forEach(e => {
+            e.innerHTML = today;
+        });
+
+        const nameEl = document.querySelectorAll('.name');
+        nameEl.forEach(e => {
+            const num = Math.floor(Math.random() * 10);
+            e.innerHTML = nameData[num];
+        });
+
+        const statusEl = document.querySelectorAll('.status');
+        statusEl.forEach(e => {
+            const num = Math.floor(Math.random() * 4);
+            const html = statusData[num] === '입금완료' ? "<i class='icon-check'></i>입금완료" : "<i class='icon-caution'></i>대기중";
+            e.innerHTML = html;
+        });
+
+        const contentEl = document.querySelectorAll('.price');
+        contentEl.forEach(e => {
+            const num = Math.floor(Math.random() * 4);
+            e.innerHTML = priceData[num];
+        });
+
+        setInterval(() => {
+            let num = Math.floor(Math.random() * 10);
+            const name = nameData[num];
+
+            num = Math.floor(Math.random() * 4);
+            const status = statusData[num] === '입금완료' ? "<i class='icon-check'></i>입금완료" : "<i class='icon-caution'></i>대기중";
+
+             num = Math.floor(Math.random() * 4);
+             const price = priceData[num];
+
+            let html = '';
+            html += '<div class="table-item-wrap swiper-slide">';
+            html += '    <span><strong class="name">'+name+'</strong><strong2 class="content"> '+price+' 상담접수완료</strong2></span>';
+            html += '    <span class="day">'+today+'</span>';
+            html += '    <span class="status">'+status+'</span>';
+            html += '</div>';
+
+            const el = document.querySelector('.swiper-wrapper');
+            el.insertAdjacentHTML('beforeend', html)
+            swiper.update();
+        }, 5);
+    });
+
+</script>
+
+<style>
+    .icon-check:before {
+        content: '';
+        background: url("data:image/svg+xml;charset=UTF-8,%3csvg style='color: %23008000;' class='svg-inline--fa fa-check fa-w-16' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='check' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' data-fa-i2svg=''%3e%3cpath fill='currentColor' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'%3e%3c/path%3e%3c/svg%3e") 0 100% / contain no-repeat;
+        display: block;
+        width: 14px;
+        height: 14px;
+        padding-right: 10px;
+    }
+
+    .icon-caution:before {
+        content: '';
+        background: url("data:image/svg+xml;charset=UTF-8,%3csvg style='color: %23e2d140; width: 13px;' class='svg-inline--fa fa-exclamation fa-w-6' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='exclamation' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 512' data-fa-i2svg=''%3e%3cpath fill='currentColor' d='M176 432c0 44.112-35.888 80-80 80s-80-35.888-80-80 35.888-80 80-80 80 35.888 80 80zM25.26 25.199l13.6 272C39.499 309.972 50.041 320 62.83 320h66.34c12.789 0 23.331-10.028 23.97-22.801l13.6-272C167.425 11.49 156.496 0 142.77 0H49.23C35.504 0 24.575 11.49 25.26 25.199z'%3e%3c/path%3e%3c/svg%3e") 0 100% / contain no-repeat;
+        display: block;
+        width: 14px;
+        height: 14px;
+        padding-right: 10px;
+    }
+
+    .table-wrap {
+		width: 100%; /* Make it responsive */
+		max-width: 1920px; /* Set maximum width to match the image */
+		margin: 0 auto;
+		position: relative;
+		height: auto; /* Allow height to adjust according to content */
+		background: #fff;
+		box-shadow: 1.5px 3.99px 27px 0 rgb(0 0 0 / 10%);
+		border-radius: 10px;
+    }
+
+    .table-header-wrap {
+    width: 100%;
+    padding: 10px;
+    height: 30px;
+    display: flex;
+    color: #fff;
+    align-items: center;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    -webkit-animation: gradient-bg 15s ease infinite;
+    animation: gradient-bg 15s ease infinite;
+    text-align: left;
+    position: absolute;
+    top: 48.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    }
+
+    .table-header-wrap > span:first-child {
+        width: 60%;
+    }
+
+    .table-header-wrap > span:not(:first-child) {
+        width: 20%;
+        text-align: center;
+    }
+
+    .table-main-wrap {
+    width: 100%;
+    height: 400px; /* Allow height to adjust according to content */
+    overflow: hidden;
+    position: absolute;
+    top: 49.5%;
+    left: 50%; /* Move it to the center horizontally */
+    transform: translateX(-50%); /* Adjust horizontally to center */
+    }
+
+    .swiper-wrapper {
+        display: flex;
+    }
+
+    .table-item-wrap {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        max-height: 50px;
+        padding: 0 10px;
+        width: auto;
+    }
+
+    .table-item-wrap strong {
+        font-weight: 400;
+        color: #bbb;
+    }
+
+    .table-item-wrap > span:first-child {
+        width: 60%;
+    }
+
+    .table-item-wrap > span:not(:first-child) {
+        width: 20%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @-webkit-keyframes gradient-bg {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @keyframes gradient-bg {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+</style>
+
+</body>
+</html>
