@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
 
     <script src="https://unpkg.com/swiper@10.2.0/swiper-bundle.min.js"></script>
@@ -151,18 +152,20 @@
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 	
-    .table-wrap {
-    width: 100%;
+.table-wrap {
+    width: 90%;
     max-width: 100%; /* Adjusted for responsiveness */
-    margin: 0 auto;
+    margin: 0 auto; /* Center horizontally */
     position: relative;
     height: auto;
     background: #fff;
     box-shadow: 1.5px 3.99px 27px 0 rgb(0 0 0 / 10%);
     border-radius: 10px;
-    display: flex; /* Centering */
-    justify-content: center; /* Centering */
-    }
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    text-align: center; /* Center inline content */
+}
 
     .table-header-wrap {
     width: 100%;
@@ -257,20 +260,19 @@
         }
     }
 	
-	@media (max-width: 768px) {
-    .table-item-wrap > span {
-        width: 33.33%; /* Adjusted for smaller screens */
+    @media (max-width: 768px) {
+        .table-wrap,
+        .table-header-wrap,
+        .table-main-wrap {
+            width: 100%;
+            max-width: none;
+        }
     }
 	
-	@media (max-width: 768px) {
-    .table-header-wrap,
-    .table-main-wrap {
-        padding-left: 0; /* Remove left padding */
-        padding-right: 0; /* Remove right padding */
-        text-align: center; /* Center-align the content */
-    }
-}
-}
+
+
+
+
 </style>
 
 </body>
