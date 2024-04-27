@@ -197,15 +197,19 @@
     transform: translateX(-50%);
     }
 
-    .table-main-wrap {
+.table-main-wrap {
     width: 100%;
-    height: 400px; /* Allow height to adjust according to content */
-    overflow: hidden;
+    max-height: 400px; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scroll */
     position: absolute;
     top: 49.5%;
-    left: 50%; /* Move it to the center horizontally */
-    transform: translateX(-50%); /* Adjust horizontally to center */
-    }
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Webkit-based browsers */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
 	
     .table-header-wrap > span:first-child {
         width: 60%;
@@ -273,34 +277,51 @@
         }
     }
 	
-@media (max-width: 768px) {
-    .table-header-wrap, .table-main-wrap {
-        width: 100vw; /* 모바일 화면 너비에 맞춤 */
-        max-width: 100%; /* 모바일에서는 최대 너비 제한을 100%로 조정 */
-        margin: 0 auto; /* 가운데 정렬 유지 */
-        box-sizing: border-box; /* 상자 모델 유지 */
-        transform: translateX(0%); /* 모바일에서는 정중앙 정렬 */
+    @media (max-width: 768px) {
+        .table-wrap,
+        .table-header-wrap,
+        .table-main-wrap {
+            width: 70%;
+            max-width: none;
+        }
     }
-
-    .table-header-wrap {
-        top: auto; /* 절대위치 조정이 필요한 경우 */
-        bottom: auto; /* 절대위치 조정이 필요한 경우 */
-        position: relative; /* 필요에 따라 위치 조정 */
-    }
-
+	
+	:root {
+    --mobile-max-height-ratio: 0.144; /* 예시 비율 */
+    --mobile-margin-top-ratio: 0.013; /* 예시 비율 */
+	--mobile-font-size-ratio: 0.009; /* 예시 비율 */
+}
+	@media (max-width: 768px) {
     .table-main-wrap {
-        height: auto; /* 내용에 따라 높이 조정 */
-        overflow: visible; /* 필요에 따라 스크롤 허용 */
-        top: auto; /* 절대위치 조정이 필요한 경우 */
-        bottom: auto; /* 절대위치 조정이 필요한 경우 */
-        position: relative; /* 필요에 따라 위치 조정 */
+        max-height: calc(100vw * var(--mobile-max-height-ratio)); /* 뷰포트 너비에 비례 */
+        margin-top: calc(100vw * var(--mobile-margin-top-ratio)); /* 뷰포트 너비에 비례 */
     }
 }
+
+@media (max-width: 768px) {
+    .table-header-wrap, .table-main-wrap {
+        font-size: calc(100vw * var(--mobile-font-size-ratio)); /* 모바일 화면에 적합한 글자 크기로 조정 */
+    }
+}
+
+@media (max-width: 768px) {
+    .table-main-wrap {
+        left: auto;
+        transform: none;
+    }
+
+    .table-header-wrap > span:first-child,
+    .table-item-wrap > span:first-child {
+        width: 70%; /* 모바일 화면에 맞게 조정 */
+    }
+
+    .table-header-wrap > span:not(:first-child),
+    .table-item-wrap > span:not(:first-child) {
+        width: 15%; /* 모바일 화면에 맞게 조정 */
+    }
+}
+
 	
-
-
-
-
 </style>
 
 </body>
