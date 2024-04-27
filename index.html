@@ -12,7 +12,7 @@
 <body>
 	
 <div class="table-wrap">
-	<img src="content1.jpg" usemap="#map01">
+	<img src="content1.jpg" usemap="#map01" class="responsive-img">
     <div class="table-header-wrap">
         <span>　접수정보</span>
         <span>접수일</span>
@@ -126,6 +126,18 @@
 </script>
 
 <style>
+/* 기본 스타일 */
+.responsive-img {
+  width: 100%; /* 이미지의 너비를 부모 요소의 100%로 설정하여 화면 크기에 맞게 조정 */
+  height: auto; /* 높이를 자동으로 조정하여 비율을 유지 */
+}
+
+/* 모바일 화면을 위한 @media 쿼리 */
+@media (max-width: 768px) {
+  .responsive-img {
+    max-width: 100%; /* 모바일 화면에서 이미지의 최대 너비를 100%로 조정 */
+  }
+}
     .icon-check:before {
         content: '';
         background: url("data:image/svg+xml;charset=UTF-8,%3csvg style='color: %23008000;' class='svg-inline--fa fa-check fa-w-16' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='check' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' data-fa-i2svg=''%3e%3cpath fill='currentColor' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'%3e%3c/path%3e%3c/svg%3e") 0 100% / contain no-repeat;
