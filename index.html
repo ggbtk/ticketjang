@@ -142,16 +142,26 @@
         height: 14px;
         padding-right: 10px;
     }
-
+	
+.table-header-wrap,
+.table-main-wrap {
+    width: 100vw; /* Set width to 100% of viewport width */
+    max-width: 1920px; /* Set maximum width to match the image */
+    margin: 0 auto; /* Center horizontally */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+	
     .table-wrap {
-		width: 100%; /* Make it responsive */
-		max-width: 1920px; /* Set maximum width to match the image */
-		margin: 0 auto;
-		position: relative;
-		height: auto; /* Allow height to adjust according to content */
-		background: #fff;
-		box-shadow: 1.5px 3.99px 27px 0 rgb(0 0 0 / 10%);
-		border-radius: 10px;
+    width: 100%;
+    max-width: 100%; /* Adjusted for responsiveness */
+    margin: 0 auto;
+    position: relative;
+    height: auto;
+    background: #fff;
+    box-shadow: 1.5px 3.99px 27px 0 rgb(0 0 0 / 10%);
+    border-radius: 10px;
+    display: flex; /* Centering */
+    justify-content: center; /* Centering */
     }
 
     .table-header-wrap {
@@ -192,16 +202,18 @@
     }
 
     .swiper-wrapper {
-        display: flex;
+    display: flex;
+    flex-wrap: wrap; /* Added to make items wrap */
     }
 
     .table-item-wrap {
-        display: flex;
-        align-items: center;
-        text-align: left;
-        max-height: 50px;
-        padding: 0 10px;
-        width: auto;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    max-height: 50px;
+    padding: 0 10px;
+    width: 100%; /* Adjusted for responsiveness */
+    box-sizing: border-box; /* Added to include padding in width */
     }
 
     .table-item-wrap strong {
@@ -244,6 +256,12 @@
             background-position: 0% 50%
         }
     }
+	
+	@media (max-width: 768px) {
+    .table-item-wrap > span {
+        width: 33.33%; /* Adjusted for smaller screens */
+    }
+}
 </style>
 
 </body>
