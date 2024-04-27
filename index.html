@@ -197,15 +197,6 @@
     transform: translateX(-50%);
     }
 
-    .table-header-wrap > span:first-child {
-        width: 60%;
-    }
-
-    .table-header-wrap > span:not(:first-child) {
-        width: 20%;
-        text-align: center;
-    }
-
     .table-main-wrap {
     width: 100%;
     height: 400px; /* Allow height to adjust according to content */
@@ -215,6 +206,16 @@
     left: 50%; /* Move it to the center horizontally */
     transform: translateX(-50%); /* Adjust horizontally to center */
     }
+	
+    .table-header-wrap > span:first-child {
+        width: 60%;
+    }
+
+    .table-header-wrap > span:not(:first-child) {
+        width: 20%;
+        text-align: center;
+    }
+
 
     .swiper-wrapper {
     display: flex;
@@ -272,14 +273,29 @@
         }
     }
 	
-    @media (max-width: 768px) {
-        .table-wrap,
-        .table-header-wrap,
-        .table-main-wrap {
-            width: 100%;
-            max-width: none;
-        }
+@media (max-width: 768px) {
+    .table-header-wrap, .table-main-wrap {
+        width: 100vw; /* 모바일 화면 너비에 맞춤 */
+        max-width: 100%; /* 모바일에서는 최대 너비 제한을 100%로 조정 */
+        margin: 0 auto; /* 가운데 정렬 유지 */
+        box-sizing: border-box; /* 상자 모델 유지 */
+        transform: translateX(0%); /* 모바일에서는 정중앙 정렬 */
     }
+
+    .table-header-wrap {
+        top: auto; /* 절대위치 조정이 필요한 경우 */
+        bottom: auto; /* 절대위치 조정이 필요한 경우 */
+        position: relative; /* 필요에 따라 위치 조정 */
+    }
+
+    .table-main-wrap {
+        height: auto; /* 내용에 따라 높이 조정 */
+        overflow: visible; /* 필요에 따라 스크롤 허용 */
+        top: auto; /* 절대위치 조정이 필요한 경우 */
+        bottom: auto; /* 절대위치 조정이 필요한 경우 */
+        position: relative; /* 필요에 따라 위치 조정 */
+    }
+}
 	
 
 
