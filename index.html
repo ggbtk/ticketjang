@@ -10,11 +10,18 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@10.2.0/swiper-bundle.min.css"/>
 </head>
 <body>
-	
+
+    
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close">&times;</span>
+        <img src="popup.jpg" alt="Popup Image">
+    </div>
+</div>
 <div class="table-wrap">
 	<img src="content1.jpg" usemap="#map01" class="responsive-img">
     <div class="table-header-wrap">
-        <span>　접수정보</span>
+        <span>접수정보</span>
         <span>접수일</span>
         <span>진행상태</span>
     </div>
@@ -73,32 +80,44 @@
 
         const now = new Date();
         const month = (now.getMonth() + 1).toString().padStart(2, "0");
-        const day = now.getDate()
-        const today = `${month}-${day}`;
+        const day = now.getDate().toString().padStart(2, "0");
+        const today = `${month}월-${day}일`;
 
         const dayEl = document.querySelectorAll('.day');
         dayEl.forEach(e => {
             e.innerHTML = today;
         });
 
-        const nameEl = document.querySelectorAll('.name');
-        nameEl.forEach(e => {
-            const num = Math.floor(Math.random() * 10);
-            e.innerHTML = nameData[num];
-        });
 
-        const statusEl = document.querySelectorAll('.status');
-        statusEl.forEach(e => {
-            const num = Math.floor(Math.random() * 4);
-            const html = statusData[num] === '입금완료' ? "<i class='icon-check'></i>입금완료" : "<i class='icon-caution'></i>대기중";
-            e.innerHTML = html;
-        });
+        function getRandomIndex(n) {
+            return Math.floor(Math.random() * n);
+        }
 
-        const contentEl = document.querySelectorAll('.price');
-        contentEl.forEach(e => {
-            const num = Math.floor(Math.random() * 4);
-            e.innerHTML = priceData[num];
-        });
+        function applyDataToElements(selector, data) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(e => {
+                const num = getRandomIndex(data.length);
+                e.innerHTML = data[num];
+            });
+        }
+
+        const STATUS_COMPLETE = '입금완료';
+        const STATUS_PENDING = '대기중';
+
+        function applyStatusToElements(selector, data) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(e => {
+                const num = getRandomIndex(data.length);
+                const html = data[num] === STATUS_COMPLETE ? `<i class='icon-check'></i>${STATUS_COMPLETE}` : `<i class='icon-caution'></i>${STATUS_PENDING}`;
+                e.innerHTML = html;
+            });
+        }
+
+        // 사용 예
+        applyDataToElements('.name', nameData);
+        applyStatusToElements('.status', statusData);
+        applyDataToElements('.price', priceData);
+
 
         setInterval(() => {
             let num = Math.floor(Math.random() * 10);
@@ -123,9 +142,81 @@
         }, 5);
     });
 
+
+
+// Get the popup
+var popup = document.getElementById("popup");
+
+// Get the <span> element that closes the popup
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the popup
+span.onclick = function() {
+    popup.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the popup, close it
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+    }
+}
+
+window.onload = function() {
+    var popup = document.getElementById("popup");
+    popup.style.display = "block";
+}
+
 </script>
 
 <style>
+    /* 팝업 */
+    .popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.popup-content img {
+    width: 100%;
+    height: auto;
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 팝업 END */
+
+
+
+
+
 /* 기본 스타일 */
 .responsive-img {
   width: 100%; /* 이미지의 너비를 부모 요소의 100%로 설정하여 화면 크기에 맞게 조정 */
